@@ -13,7 +13,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         public SolarizedLightSplitterControl(DockPane pane)
             : base(pane)
         {
-            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor);
+            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor);
             this._verticalSurroundColors = new[]
                                                {
                                                    pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient
