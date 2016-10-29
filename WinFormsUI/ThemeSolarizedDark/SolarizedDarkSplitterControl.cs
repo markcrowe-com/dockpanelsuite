@@ -13,7 +13,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         public SolarizedDarkSplitterControl(DockPane pane)
             : base(pane)
         {
-            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor);
+            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor);
             this._verticalSurroundColors = new[]
                                                {
                                                    pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient
@@ -35,6 +35,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                 case DockAlignment.Right:
                 case DockAlignment.Left:
                     {
+                        e.Graphics.FillRectangle(_horizontalBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
+/*
                         using (var path = new GraphicsPath())
                         {
                             path.AddRectangle(rect);
@@ -47,6 +49,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                                                          Measures.SplitterSize / 3, rect.Height);
                             }
                         }
+*/
                     }
                     break;
                 case DockAlignment.Bottom:

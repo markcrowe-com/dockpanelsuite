@@ -24,7 +24,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 throw new NullReferenceException("dockPanel");
             }
 
-            Measures.SplitterSize = 6;
+            Measures.SplitterSize = 2;
             dockPanel.Extender.DockPaneCaptionFactory = new SolarizedDarkDockPaneCaptionFactory();
             dockPanel.Extender.AutoHideStripFactory = new SolarizedDarkAutoHideStripFactory();
             dockPanel.Extender.AutoHideWindowFactory = new SolarizedDarkAutoHideWindowFactory();
