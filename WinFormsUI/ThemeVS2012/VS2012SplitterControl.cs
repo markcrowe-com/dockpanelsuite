@@ -13,7 +13,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         public VS2012SplitterControl(DockPane pane)
             : base(pane)
         {
-            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor);
+            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor); // splitter
             this._verticalSurroundColors = new[]
                                                {
                                                    pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient

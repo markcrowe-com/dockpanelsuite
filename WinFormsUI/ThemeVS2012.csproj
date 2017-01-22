@@ -97,8 +97,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ThemeVS2012\Resources\ActiveTabHover_Close.png" />
-    <Content Include="ThemeVS2012\Resources\ActiveTab_Close.png" />
     <Content Include="ThemeVS2012\Resources\DockIndicator_PaneDiamond1.bmp" />
     <Content Include="ThemeVS2012\Resources\Dockindicator_PaneDiamond_Fill.png" />
     <Content Include="ThemeVS2012\Resources\DockIndicator_PaneDiamond_HotspotIndex.png" />
@@ -114,9 +112,7 @@
     <Content Include="ThemeVS2012\Resources\DockPane_Dock.png" />
     <Content Include="ThemeVS2012\Resources\DockPane_Option.png" />
     <Content Include="ThemeVS2012\Resources\DockPane_OptionOverflow.png" />
-    <Content Include="ThemeVS2012\Resources\InactiveTabHover_Close.png" />
-    <Content Include="ThemeVS2012\Resources\LostFocusTabHover_Close.png" />
-    <Content Include="ThemeVS2012\Resources\LostFocusTab_Close.png" />
+    <Content Include="ThemeVS2012\Resources\Tab_Close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask Condition=" '$(Configuration)' == 'Release' AND '$(OS)' == 'Windows_NT' AND Exists('..\gendarme\GendarmeMsBuild.dll')" AssemblyFile="..\gendarme\GendarmeMsBuild.dll" TaskName="GendarmeMsBuild.Gendarme" />

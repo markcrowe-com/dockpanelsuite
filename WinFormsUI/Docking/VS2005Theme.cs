@@ -71,5 +71,11 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             return skin;
         }
+
+        public override void SetStyle(string[] styles)
+        {
+            return;
+        }
+
     }
 }

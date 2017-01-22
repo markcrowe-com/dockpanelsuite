@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -24,7 +24,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 throw new NullReferenceException("dockPanel");
             }
 
-            Measures.SplitterSize = 2;
+            Measures.SplitterSize = 2; // UInt16.Parse(Styles[0]);
             dockPanel.Extender.DockPaneCaptionFactory = new VS2012DockPaneCaptionFactory();
             dockPanel.Extender.AutoHideStripFactory = new VS2012AutoHideStripFactory();
             dockPanel.Extender.AutoHideWindowFactory = new VS2012AutoHideWindowFactory();
@@ -35,7 +35,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             dockPanel.Extender.PaneIndicatorFactory = new VS2012PaneIndicatorFactory();
             dockPanel.Extender.PanelIndicatorFactory = new VS2012PanelIndicatorFactory();
             dockPanel.Extender.DockOutlineFactory = new VS2012DockOutlineFactory();
-            dockPanel.Skin = CreateVS2012();
+            dockPanel.Skin = CreateVS2012(Styles);
         }
 
         private class VS2012DockOutlineFactory : DockPanelExtender.IDockOutlineFactory
@@ -457,65 +457,70 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        public static DockPanelSkin CreateVS2012()
+        public static DockPanelSkin CreateVS2012(string[] styles)
         {
-            // Solarized
-            var SolarizedBase03 = Color.FromArgb(unchecked((int)0xFF002B36));
-            var SolarizedBase02 = Color.FromArgb(unchecked((int)0xFF073642));
-            var SolarizedBase01 = Color.FromArgb(unchecked((int)0xFF586E75));
-            var SolarizedBase00 = Color.FromArgb(unchecked((int)0xFF657B83));
-            var SolarizedBase0 = Color.FromArgb(unchecked((int)0xFF839496));
-            var SolarizedBase1 = Color.FromArgb(unchecked((int)0xFF93A1A1));
-            var SolarizedBase2 = Color.FromArgb(unchecked((int)0xFFEEE8D5));
-            var SolarizedBase3 = Color.FromArgb(unchecked((int)0xFFFDF6E3));
-            var SolarizedYellow  = Color.FromArgb(unchecked((int)0xFFB58900));
-            var SolarizedOrange  = Color.FromArgb(unchecked((int)0xFFCB4B16));
-            var SolarizedRed     = Color.FromArgb(unchecked((int)0xFFDC322F));
-            var SolarizedMagenta = Color.FromArgb(unchecked((int)0xFFD33682)); 
-            var SolarizedViolet  = Color.FromArgb(unchecked((int)0xFF6C71C4));
-            var SolarizedBlue    = Color.FromArgb(unchecked((int)0xFF268BD2));
-            var SolarizedCyan    = Color.FromArgb(unchecked((int)0xFF2AA198));
-            var SolarizedGreen   = Color.FromArgb(unchecked((int)0xFF859900));
+            Color foreground     = ColorTranslator.FromHtml(styles[0]);
+            Color background     = ColorTranslator.FromHtml(styles[1]);
+            Color background2    = ColorTranslator.FromHtml(styles[2]); // splitter
+            Color tabActiveFG    = ColorTranslator.FromHtml(styles[3]);
+            Color tabActiveBG    = ColorTranslator.FromHtml(styles[4]);
+            Color tabLostFocusFG = ColorTranslator.FromHtml(styles[5]);
+            Color tabLostFocusBG = ColorTranslator.FromHtml(styles[6]);
+            Color tabHoverFG     = ColorTranslator.FromHtml(styles[7]);
+            Color tabHoverBG     = ColorTranslator.FromHtml(styles[8]);
 
-            var dot = Color.FromArgb(80, 170, 220);
-            var lostFocusTab = Color.FromArgb(0xFF, 204, 206, 219);
             var skin = new DockPanelSkin();
 
-            skin.AutoHideStripSkin.DockStripGradient.StartColor = SolarizedBase02;
-            skin.AutoHideStripSkin.DockStripGradient.EndColor = SystemColors.ControlLight;
-            skin.AutoHideStripSkin.TabGradient.TextColor = SystemColors.ControlDarkDark;
+            // 标签栏背景色
+            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor = background;
+            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.EndColor   = background;
 
-            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor = SolarizedBase03;
-            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.EndColor = SolarizedBase03;
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor = SolarizedBase02;
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor = SolarizedBase02; // temp: same as focus
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.TextColor = SolarizedBase1;
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor = SolarizedBase03;
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor = SolarizedBase02;
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.TextColor = SolarizedBase0;
+            // 标签页 - 背景色
+            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor = tabActiveBG;   // 活动前台标签
+            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor = tabLostFocusBG;  // 非活动前台标签
+            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor = tabHoverBG;    // 鼠标悬停标签
+            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor = background;  // 后台标签
+            // 标签页 - 文字色
+            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.TextColor = tabActiveFG;   // 活动前台标签
+            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.TextColor = foreground;  // 后台标签
 
-            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.StartColor = SolarizedBase03;
-            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.EndColor = SolarizedBase03;
+            // 常驻侧边栏 - 标签栏背景色
+            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.StartColor = background;
+            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.EndColor   = background;
+            // 常驻侧边栏 - 标签页背景色 ( 前台标签 )
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.StartColor = tabActiveBG;
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.EndColor = tabActiveBG;
+            // 常驻侧边栏 - 标签页文字色
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.TextColor = tabActiveFG;      // 前台标签
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.TextColor = tabLostFocusFG; // 后台标签
 
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.StartColor = SystemColors.ControlLightLight;
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.EndColor = SystemColors.ControlLightLight;
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.TextColor = SolarizedBase02;
-
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.StartColor = SolarizedBase03;
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor = SolarizedBase03;
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.TextColor = SystemColors.GrayText;
-
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.StartColor = SolarizedBase02;
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.EndColor = dot;
+            // 常驻侧边栏 - 标题栏背景色
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.StartColor = tabActiveBG;      // 活动标题栏
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.EndColor = background;         // 活动标题栏纹理
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.StartColor = tabLostFocusBG; // 非活动标题栏
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = background;       // 非活动标题栏纹理
             skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.LinearGradientMode = LinearGradientMode.Vertical;
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.TextColor = Color.White;
-
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.StartColor = SolarizedBase03;
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = SystemColors.ControlDark;
             skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.LinearGradientMode = LinearGradientMode.Vertical;
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.TextColor = SystemColors.GrayText;
+            // 常驻侧边栏 - 标题栏文字色
+            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.TextColor = tabActiveFG;      // 活动标题栏
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.TextColor = tabLostFocusFG; // 非活动标题栏
+
+            // 自动隐藏侧边栏 - 标签栏背景色
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.StartColor = background2;
+            // 自动隐藏侧边栏 - 标签栏指示器
+            skin.AutoHideStripSkin.DockStripGradient.StartColor = foreground; // 活动
+            skin.AutoHideStripSkin.DockStripGradient.EndColor = background;   // 非活动
+
+            // 其他
+            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor = background2; // 分割线颜色
+            skin.AutoHideStripSkin.TabGradient.TextColor = Color.Magenta; // 未使用？
 
             return skin;
         }
+
+        // Customizable Styles
+        private string[] Styles;
+        public override void SetStyle(string[] styles) { Styles = styles; }
+
     }
 }

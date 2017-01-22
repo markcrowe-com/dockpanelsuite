@@ -63,26 +63,6 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012 {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ActiveTab_Close {
-            get {
-                object obj = ResourceManager.GetObject("ActiveTab_Close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ActiveTabHover_Close {
-            get {
-                object obj = ResourceManager.GetObject("ActiveTabHover_Close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Dockindicator_PaneDiamond {
             get {
                 object obj = ResourceManager.GetObject("Dockindicator_PaneDiamond", resourceCulture);
@@ -223,29 +203,9 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2012 {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap InactiveTabHover_Close {
+        internal static System.Drawing.Bitmap Tab_Close {
             get {
-                object obj = ResourceManager.GetObject("InactiveTabHover_Close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LostFocusTab_Close {
-            get {
-                object obj = ResourceManager.GetObject("LostFocusTab_Close", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LostFocusTabHover_Close {
-            get {
-                object obj = ResourceManager.GetObject("LostFocusTabHover_Close", resourceCulture);
+                object obj = ResourceManager.GetObject("Tab_Close", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

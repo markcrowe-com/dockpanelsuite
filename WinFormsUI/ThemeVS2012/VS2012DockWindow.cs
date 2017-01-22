@@ -48,6 +48,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             private SolidBrush _horizontalBrush;
             private Color[] _verticalSurroundColors;
+            private SolidBrush _splitterBrush;
 
             protected override int SplitterSize
             {
@@ -81,6 +82,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     var skin = window.DockPanel.Skin;
                     _horizontalBrush = new SolidBrush(skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor);
                     _verticalSurroundColors = new[] { skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor };
+                    _splitterBrush = new SolidBrush(skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor);
                 }
 
                 switch (Dock)
@@ -88,6 +90,8 @@ namespace WeifenLuo.WinFormsUI.Docking
                     case DockStyle.Right:
                     case DockStyle.Left:
                         {
+                            e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
+ /*
                             using (var path = new GraphicsPath())
                             {
                                 path.AddRectangle(rect);
@@ -100,12 +104,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                                                              Measures.SplitterSize/3, rect.Height);
                                 }
                             }
+*/
                         }
                         break;
                     case DockStyle.Bottom:
                     case DockStyle.Top:
                         {
-                            e.Graphics.FillRectangle(_horizontalBrush, rect.X, rect.Y,
+                            e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y,
                                                      rect.Width, Measures.SplitterSize);
                         }
                         break;

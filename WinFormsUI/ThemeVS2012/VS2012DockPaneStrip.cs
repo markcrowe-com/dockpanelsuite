@@ -6,6 +6,7 @@ using System.ComponentModel;
 
 namespace WeifenLuo.WinFormsUI.Docking
 {
+    using System.Drawing.Imaging;
     using WeifenLuo.WinFormsUI.ThemeVS2012;
 
     internal class VS2012DockPaneStrip : DockPaneStripBase
@@ -1152,6 +1153,14 @@ namespace WeifenLuo.WinFormsUI.Docking
                 g.DrawIcon(tab.Content.DockHandler.Icon, rectIcon);
         }
 
+        private Color MergeBy50(Color c1, Color c2) {
+            return Color.FromArgb(
+                (int)(c1.R * 0.5 + c2.R * 0.5),
+                (int)(c1.G * 0.5 + c2.G * 0.5),
+                (int)(c1.B * 0.5 + c2.B * 0.5)
+            );
+        }
+
         private void DrawTab_Document(Graphics g, TabVS2012 tab, Rectangle rect)
         {
             if (tab.TabWidth == 0)
@@ -1190,19 +1199,82 @@ namespace WeifenLuo.WinFormsUI.Docking
             Color inactiveText = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.TextColor;
             Color lostFocusText = DockPane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.TextColor;
 
+            Color activeCloseBtn = MergeBy50(activeText, activeColor);
+            Color activeCloseBtn_hover = MergeBy50(activeText, mouseHoverColor);
+            Color lostFocusCloseBtn = MergeBy50(lostFocusText, lostFocusColor);
+            Color lostFocusCloseBtn_hover = MergeBy50(lostFocusText, mouseHoverColor);
+
             if (DockPane.ActiveContent == tab.Content)
             {
                 if (DockPane.IsActiveDocumentPane)
                 {
                     g.FillRectangle(new SolidBrush(activeColor), rect);
                     TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, activeText, DocumentTextFormat);
-                    g.DrawImage(rectCloseButton == ActiveClose ? Resources.ActiveTabHover_Close : Resources.ActiveTab_Close, rectCloseButton);
+
+                    using (ImageAttributes imageAttributes = new ImageAttributes())
+                    {
+                        ColorMap[] colorMap = new ColorMap[3];
+                        colorMap[0] = new ColorMap();
+                        colorMap[0].OldColor = Color.Black;
+                        colorMap[1] = new ColorMap();
+                        colorMap[1].OldColor = Color.White;
+                        colorMap[2] = new ColorMap();
+                        colorMap[2].OldColor = Color.Magenta;
+                        if (rectCloseButton == ActiveClose) { // :hover
+                            colorMap[0].NewColor = activeText;
+                            colorMap[1].NewColor = activeCloseBtn_hover;
+                            colorMap[2].NewColor = mouseHoverColor;
+                        } else {
+                            colorMap[0].NewColor = activeText;
+                            colorMap[1].NewColor = activeCloseBtn;
+                            colorMap[2].NewColor = Color.Transparent;
+                        }
+                        imageAttributes.SetRemapTable(colorMap);
+                        Image image = Resources.Tab_Close;
+                        g.DrawImage(image,
+                           rectCloseButton,
+                           0, 0,
+                           image.Width,
+                           image.Height,
+                           GraphicsUnit.Pixel,
+                           imageAttributes);
+                    }
+                    //g.DrawImage(rectCloseButton == ActiveClose ? Resources.ActiveTabHover_Close : Resources.ActiveTab_Close, rectCloseButton);
                 }
                 else
                 {
                     g.FillRectangle(new SolidBrush(lostFocusColor), rect);
                     TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, lostFocusText, DocumentTextFormat);
-                    g.DrawImage(rectCloseButton == ActiveClose ? Resources.LostFocusTabHover_Close : Resources.LostFocusTab_Close, rectCloseButton);
+
+                    using (ImageAttributes imageAttributes = new ImageAttributes())
+                    {
+                        ColorMap[] colorMap = new ColorMap[3];
+                        colorMap[0] = new ColorMap();
+                        colorMap[0].OldColor = Color.Black;
+                        colorMap[1] = new ColorMap();
+                        colorMap[1].OldColor = Color.White;
+                        colorMap[2] = new ColorMap();
+                        colorMap[2].OldColor = Color.Magenta;
+                        if (rectCloseButton == ActiveClose) { // :hover
+                            colorMap[0].NewColor = lostFocusText;
+                            colorMap[1].NewColor = lostFocusCloseBtn_hover;
+                            colorMap[2].NewColor = mouseHoverColor;
+                        } else {
+                            colorMap[0].NewColor = lostFocusText;
+                            colorMap[1].NewColor = lostFocusCloseBtn;
+                            colorMap[2].NewColor = Color.Transparent;
+                        }
+                        imageAttributes.SetRemapTable(colorMap);
+                        Image image = Resources.Tab_Close;
+                        g.DrawImage(image,
+                           rectCloseButton,
+                           0, 0,
+                           image.Width,
+                           image.Height,
+                           GraphicsUnit.Pixel,
+                           imageAttributes);
+                    }
+                    //g.DrawImage(rectCloseButton == ActiveClose ? Resources.LostFocusTabHover_Close : Resources.LostFocusTab_Close, rectCloseButton);
                 }
             }
             else
@@ -1211,7 +1283,36 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     g.FillRectangle(new SolidBrush(mouseHoverColor), rect);
                     TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, activeText, DocumentTextFormat);
-                    g.DrawImage(rectCloseButton == ActiveClose ? Resources.InactiveTabHover_Close : Resources.ActiveTabHover_Close, rectCloseButton);
+
+                    using (ImageAttributes imageAttributes = new ImageAttributes())
+                    {
+                        ColorMap[] colorMap = new ColorMap[3];
+                        colorMap[0] = new ColorMap();
+                        colorMap[0].OldColor = Color.Black;
+                        colorMap[1] = new ColorMap();
+                        colorMap[1].OldColor = Color.White;
+                        colorMap[2] = new ColorMap();
+                        colorMap[2].OldColor = Color.Magenta;
+                        if (rectCloseButton == ActiveClose) { // :hover
+                            colorMap[0].NewColor = activeText;
+                            colorMap[1].NewColor = activeCloseBtn_hover;
+                            colorMap[2].NewColor = mouseHoverColor;
+                        } else {
+                            colorMap[0].NewColor = lostFocusText;
+                            colorMap[1].NewColor = lostFocusCloseBtn_hover;
+                            colorMap[2].NewColor = mouseHoverColor;
+                        }
+                        imageAttributes.SetRemapTable(colorMap);
+                        Image image = Resources.Tab_Close;
+                        g.DrawImage(image,
+                           rectCloseButton,
+                           0, 0,
+                           image.Width,
+                           image.Height,
+                           GraphicsUnit.Pixel,
+                           imageAttributes);
+                    }
+                    //g.DrawImage(rectCloseButton == ActiveClose ? Resources.InactiveTabHover_Close : Resources.ActiveTabHover_Close, rectCloseButton);
                 }
                 else
                 {
@@ -1253,7 +1354,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
 
             const int gap = 3;
-            const int imageSize = 15;
+            const int imageSize = 14;
             return new Rectangle(rectTab.X + rectTab.Width - imageSize - gap - 1, rectTab.Y + gap, imageSize, imageSize);
         }
 

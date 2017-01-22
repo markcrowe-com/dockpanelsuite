@@ -37,11 +37,14 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (rect.Width <= 0 || rect.Height <= 0)
                     return;
 
+                SolidBrush _splitterBrush = new SolidBrush(AutoHideWindow.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor);
                 switch (AutoHideWindow.DockState)
                 {
                     case DockState.DockRightAutoHide:
                     case DockState.DockLeftAutoHide:
                         {
+                            e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
+/*
                             using (var path = new GraphicsPath())
                             {
                                 path.AddRectangle(rect);
@@ -54,12 +57,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                                                              Measures.SplitterSize / 3, rect.Height);
                                 }
                             }
+*/
                         }
                         break;
                     case DockState.DockBottomAutoHide:
                     case DockState.DockTopAutoHide:
                         {
-                            e.Graphics.FillRectangle(_horizontalBrush, rect.X, rect.Y,
+                            e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y,
                                             rect.Width, Measures.SplitterSize);
                         }
                         break;

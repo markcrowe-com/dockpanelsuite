@@ -10,7 +10,6 @@ namespace WeifenLuo.WinFormsUI.Docking
         [LocalizedCategory("Category_Docking")]
         [LocalizedDescription("DockPanel_DockPanelSkin")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [Obsolete("Please use Theme instead.")]
         [Browsable(false)]
         public DockPanelSkin Skin
         {
@@ -31,14 +30,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                     return;
                 }
 
-                if (m_dockPanelTheme.GetType() == value.GetType())
-                {
-                    return;
-                }
-
                 m_dockPanelTheme = value;
+                m_dockPanelTheme.SetStyle(Styles);
                 m_dockPanelTheme.Apply(this);
             }
         }
+
+        public  string[] Styles { get; set; }
+
     }
 }
