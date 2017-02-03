@@ -90,7 +90,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private const int _ToolWindowStripGapLeft = 0;
         private const int _ToolWindowStripGapRight = 0;
         private const int _ToolWindowImageHeight = 16;
-        private const int _ToolWindowImageWidth = 0;//16;
+        private const int _ToolWindowImageWidth = 16;//16;
         private const int _ToolWindowImageGapTop = 3;
         private const int _ToolWindowImageGapBottom = 1;
         private const int _ToolWindowImageGapLeft = 2;
