@@ -209,7 +209,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.FillRectangle(new SolidBrush(DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.StartColor), ClientRectangle);
+            g.FillRectangle(new SolidBrush(DockPanel.Skin.AutoHideTabBarBG), ClientRectangle);
             DrawTabStrip(g);
         }
 
@@ -230,6 +230,44 @@ namespace WeifenLuo.WinFormsUI.Docking
         private void DrawTabStrip(Graphics g, DockState dockState)
         {
             Rectangle rectTabStrip = GetLogicalTabStripRectangle(dockState);
+
+            // Draw Splitter
+            Rectangle rectSplitter;
+            switch(dockState)
+            {
+                case DockState.DockLeftAutoHide:
+                    rectSplitter = new Rectangle(
+                        rectTabStrip.X + rectTabStrip.Height - Measures.SplitterSize,
+                        rectTabStrip.Y,
+                        Measures.SplitterSize,
+                        rectTabStrip.Width);
+                    break;
+                case DockState.DockRightAutoHide:
+                    rectSplitter = new Rectangle(
+                        rectTabStrip.X,
+                        rectTabStrip.Y,
+                        Measures.SplitterSize,
+                        rectTabStrip.Width);
+                    break;
+                case DockState.DockTopAutoHide:
+                    rectSplitter = new Rectangle(
+                        rectTabStrip.X - Measures.SplitterSize,
+                        rectTabStrip.Y + rectTabStrip.Height - Measures.SplitterSize,
+                        rectTabStrip.Width + Measures.SplitterSize * 2,
+                        Measures.SplitterSize);
+                    break;
+                case DockState.DockBottomAutoHide:
+                    rectSplitter = new Rectangle(
+                        rectTabStrip.X - Measures.SplitterSize,
+                        rectTabStrip.Y,
+                        rectTabStrip.Width + Measures.SplitterSize * 2,
+                        Measures.SplitterSize);
+                    break;
+                default:
+                    rectSplitter = new Rectangle(0, 0, 0, 0);
+                    break;
+            }
+            g.FillRectangle(new SolidBrush(DockPanel.Skin.PanelSplitter), rectSplitter);
 
             if (rectTabStrip.IsEmpty)
                 return;
@@ -323,9 +361,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             Color textColor;
             if (tab.Content.DockHandler.IsActivated || tab.IsMouseOver)
-                textColor = DockPanel.Skin.AutoHideStripSkin.DockStripGradient.StartColor;
+                textColor = DockPanel.Skin.AutoHideTabActive;
             else
-                textColor = DockPanel.Skin.AutoHideStripSkin.DockStripGradient.EndColor;
+                textColor = DockPanel.Skin.AutoHideTabBarFG;
 
             Rectangle rectThickLine = rectTabOrigin;
             rectThickLine.X += _TabGapLeft + _TextGapLeft + _ImageGapLeft + _ImageWidth;
@@ -385,9 +423,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             rectText = RtlTransform(GetTransformedRectangle(dockState, rectText), dockState);
 
             if (DockPanel.ActiveContent == content || tab.IsMouseOver)
-                textColor = DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.TextColor;
+                textColor = DockPanel.Skin.AutoHideTabActive;
             else
-                textColor = DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.TextColor;
+                textColor = DockPanel.Skin.AutoHideTabBarFG;
 
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
                 g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText, StringFormatTabVertical);

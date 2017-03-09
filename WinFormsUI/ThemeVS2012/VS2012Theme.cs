@@ -459,61 +459,40 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public static DockPanelSkin CreateVS2012(string[] styles)
         {
-            Color foreground     = ColorTranslator.FromHtml(styles[0]);
-            Color background     = ColorTranslator.FromHtml(styles[1]);
-            Color background2    = ColorTranslator.FromHtml(styles[2]); // splitter
-            Color tabActiveFG    = ColorTranslator.FromHtml(styles[3]);
-            Color tabActiveBG    = ColorTranslator.FromHtml(styles[4]);
-            Color tabLostFocusFG = ColorTranslator.FromHtml(styles[5]);
-            Color tabLostFocusBG = ColorTranslator.FromHtml(styles[6]);
-            Color tabHoverFG     = ColorTranslator.FromHtml(styles[7]);
-            Color tabHoverBG     = ColorTranslator.FromHtml(styles[8]);
-
             var skin = new DockPanelSkin();
 
-            // 标签栏背景色
-            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.StartColor = background;
-            skin.DockPaneStripSkin.DocumentGradient.DockStripGradient.EndColor   = background;
-
-            // 标签页 - 背景色
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.StartColor = tabActiveBG;   // 活动前台标签
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor = tabLostFocusBG;  // 非活动前台标签
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.EndColor = tabHoverBG;    // 鼠标悬停标签
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor = background;  // 后台标签
-            // 标签页 - 文字色
-            skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.TextColor = tabActiveFG;   // 活动前台标签
-            skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.TextColor = foreground;  // 后台标签
-
-            // 常驻侧边栏 - 标签栏背景色
-            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.StartColor = background;
-            skin.DockPaneStripSkin.ToolWindowGradient.DockStripGradient.EndColor   = background;
-            // 常驻侧边栏 - 标签页背景色 ( 前台标签 )
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.StartColor = tabActiveBG;
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.EndColor = tabActiveBG;
-            // 常驻侧边栏 - 标签页文字色
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveTabGradient.TextColor = tabActiveFG;      // 前台标签
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.TextColor = tabLostFocusFG; // 后台标签
-
-            // 常驻侧边栏 - 标题栏背景色
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.StartColor = tabActiveBG;      // 活动标题栏
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.EndColor = background;         // 活动标题栏纹理
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.StartColor = tabLostFocusBG; // 非活动标题栏
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.EndColor = background;       // 非活动标题栏纹理
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.LinearGradientMode = LinearGradientMode.Vertical;
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.LinearGradientMode = LinearGradientMode.Vertical;
-            // 常驻侧边栏 - 标题栏文字色
-            skin.DockPaneStripSkin.ToolWindowGradient.ActiveCaptionGradient.TextColor = tabActiveFG;      // 活动标题栏
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveCaptionGradient.TextColor = tabLostFocusFG; // 非活动标题栏
-
-            // 自动隐藏侧边栏 - 标签栏背景色
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.StartColor = background2;
-            // 自动隐藏侧边栏 - 标签栏指示器
-            skin.AutoHideStripSkin.DockStripGradient.StartColor = foreground; // 活动
-            skin.AutoHideStripSkin.DockStripGradient.EndColor = background;   // 非活动
-
-            // 其他
-            skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor = background2; // 分割线颜色
-            skin.AutoHideStripSkin.TabGradient.TextColor = Color.Magenta; // 未使用？
+            // PanelSplitter
+            skin.PanelSplitter                = ColorTranslator.FromHtml(styles[0]);
+            // DocumentPanel
+            skin.DocTabBarFG                  = ColorTranslator.FromHtml(styles[1]);
+            skin.DocTabBarBG                  = ColorTranslator.FromHtml(styles[2]);
+            skin.DocTabActiveFG               = ColorTranslator.FromHtml(styles[3]);
+            skin.DocTabActiveBG               = ColorTranslator.FromHtml(styles[4]);
+            skin.DocTabActiveLostFocusFG      = ColorTranslator.FromHtml(styles[5]);
+            skin.DocTabActiveLostFocusBG      = ColorTranslator.FromHtml(styles[6]);
+            skin.DocTabInactiveHoverFG        = ColorTranslator.FromHtml(styles[7]);
+            skin.DocTabInactiveHoverBG        = ColorTranslator.FromHtml(styles[8]);
+            skin.DocBtnActiveHoverFG          = ColorTranslator.FromHtml(styles[9]);
+            skin.DocBtnActiveHoverBG          = ColorTranslator.FromHtml(styles[10]);
+            skin.DocBtnActiveLostFocusHoverFG = ColorTranslator.FromHtml(styles[11]);
+            skin.DocBtnActiveLostFocusHoverBG = ColorTranslator.FromHtml(styles[12]);
+            skin.DocBtnInactiveHoverFG        = ColorTranslator.FromHtml(styles[13]);
+            skin.DocBtnInactiveHoverBG        = ColorTranslator.FromHtml(styles[14]);
+            // ToolWindowPanel
+            skin.ToolTabBarFG                 = ColorTranslator.FromHtml(styles[15]);
+            skin.ToolTabBarBG                 = ColorTranslator.FromHtml(styles[16]);
+            skin.ToolTabActiveFG              = ColorTranslator.FromHtml(styles[17]);
+            skin.ToolTabActiveBG              = ColorTranslator.FromHtml(styles[18]);
+            skin.ToolTitleActiveFG            = ColorTranslator.FromHtml(styles[19]);
+            skin.ToolTitleActiveBG            = ColorTranslator.FromHtml(styles[20]);
+            skin.ToolTitleLostFocusFG         = ColorTranslator.FromHtml(styles[21]);
+            skin.ToolTitleLostFocusBG         = ColorTranslator.FromHtml(styles[22]);
+            skin.ToolTitleDotActive           = ColorTranslator.FromHtml(styles[23]);
+            skin.ToolTitleDotLostFocus        = ColorTranslator.FromHtml(styles[24]);
+            // AutoHidePanel
+            skin.AutoHideTabBarFG             = ColorTranslator.FromHtml(styles[25]);
+            skin.AutoHideTabBarBG             = ColorTranslator.FromHtml(styles[26]);
+            skin.AutoHideTabActive            = ColorTranslator.FromHtml(styles[27]);
 
             return skin;
         }

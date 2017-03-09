@@ -46,8 +46,6 @@ namespace WeifenLuo.WinFormsUI.Docking
         
         internal class VS2012DockWindowSplitterControl : SplitterBase
         {
-            private SolidBrush _horizontalBrush;
-            private Color[] _verticalSurroundColors;
             private SolidBrush _splitterBrush;
 
             protected override int SplitterSize
@@ -77,12 +75,10 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (window == null)
                     return;
 
-                if (this._horizontalBrush == null)
+                if (this._splitterBrush == null)
                 {
                     var skin = window.DockPanel.Skin;
-                    _horizontalBrush = new SolidBrush(skin.DockPaneStripSkin.DocumentGradient.ActiveTabGradient.EndColor);
-                    _verticalSurroundColors = new[] { skin.DockPaneStripSkin.DocumentGradient.InactiveTabGradient.StartColor };
-                    _splitterBrush = new SolidBrush(skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor);
+                    _splitterBrush = new SolidBrush(skin.PanelSplitter);
                 }
 
                 switch (Dock)
@@ -91,20 +87,6 @@ namespace WeifenLuo.WinFormsUI.Docking
                     case DockStyle.Left:
                         {
                             e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
- /*
-                            using (var path = new GraphicsPath())
-                            {
-                                path.AddRectangle(rect);
-                                using (var brush = new PathGradientBrush(path)
-                                    {
-                                        CenterColor = Color.FromArgb(0xFF, 204, 206, 219), SurroundColors = _verticalSurroundColors
-                                    })
-                                {
-                                    e.Graphics.FillRectangle(brush, rect.X + Measures.SplitterSize / 2 - 1, rect.Y, 
-                                                             Measures.SplitterSize/3, rect.Height);
-                                }
-                            }
-*/
                         }
                         break;
                     case DockStyle.Bottom:
