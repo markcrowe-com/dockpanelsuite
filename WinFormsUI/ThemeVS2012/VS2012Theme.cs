@@ -481,18 +481,17 @@ namespace WeifenLuo.WinFormsUI.Docking
             // ToolWindowPanel
             skin.ToolTabBarFG                 = ColorTranslator.FromHtml(styles[15]);
             skin.ToolTabBarBG                 = ColorTranslator.FromHtml(styles[16]);
-            skin.ToolTabActiveFG              = ColorTranslator.FromHtml(styles[17]);
-            skin.ToolTabActiveBG              = ColorTranslator.FromHtml(styles[18]);
-            skin.ToolTitleActiveFG            = ColorTranslator.FromHtml(styles[19]);
-            skin.ToolTitleActiveBG            = ColorTranslator.FromHtml(styles[20]);
-            skin.ToolTitleLostFocusFG         = ColorTranslator.FromHtml(styles[21]);
-            skin.ToolTitleLostFocusBG         = ColorTranslator.FromHtml(styles[22]);
-            skin.ToolTitleDotActive           = ColorTranslator.FromHtml(styles[23]);
-            skin.ToolTitleDotLostFocus        = ColorTranslator.FromHtml(styles[24]);
+            skin.ToolTabActive                = ColorTranslator.FromHtml(styles[17]);
+            skin.ToolTitleActiveFG            = ColorTranslator.FromHtml(styles[18]);
+            skin.ToolTitleActiveBG            = ColorTranslator.FromHtml(styles[19]);
+            skin.ToolTitleLostFocusFG         = ColorTranslator.FromHtml(styles[20]);
+            skin.ToolTitleLostFocusBG         = ColorTranslator.FromHtml(styles[21]);
+            skin.ToolTitleDotActive           = ColorTranslator.FromHtml(styles[22]);
+            skin.ToolTitleDotLostFocus        = ColorTranslator.FromHtml(styles[23]);
             // AutoHidePanel
-            skin.AutoHideTabBarFG             = ColorTranslator.FromHtml(styles[25]);
-            skin.AutoHideTabBarBG             = ColorTranslator.FromHtml(styles[26]);
-            skin.AutoHideTabActive            = ColorTranslator.FromHtml(styles[27]);
+            skin.AutoHideTabBarFG             = ColorTranslator.FromHtml(styles[24]);
+            skin.AutoHideTabBarBG             = ColorTranslator.FromHtml(styles[25]);
+            skin.AutoHideTabActive            = ColorTranslator.FromHtml(styles[26]);
 
             return skin;
         }

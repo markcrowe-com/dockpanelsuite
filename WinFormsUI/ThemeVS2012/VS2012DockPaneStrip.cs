@@ -1025,7 +1025,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             Rectangle rectTabStrip = TabStripRectangle;
 
-            g.DrawLine(PenToolWindowTabBorder, rectTabStrip.Left, rectTabStrip.Top,
+            g.DrawLine(new Pen(DockPane.DockPanel.Skin.PanelSplitter), rectTabStrip.Left, rectTabStrip.Top,
                 rectTabStrip.Right, rectTabStrip.Top);
 
             for (int i = 0; i < Tabs.Count; i++)
@@ -1130,24 +1130,28 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (DockPane.ActiveContent == tab.Content && ((DockContent)tab.Content).IsActivated)
             {
                 LinearGradientMode gradientMode = LinearGradientMode.Vertical;
-                Color tabColor = DockPane.DockPanel.Skin.ToolTabActiveBG;
-                g.FillRectangle(new LinearGradientBrush(rectTab, tabColor, tabColor, gradientMode), rect);
+                //Color tabColor = DockPane.DockPanel.Skin.ToolTabActiveBG;
+                //g.FillRectangle(new LinearGradientBrush(rectTab, tabColor, tabColor, gradientMode), rect);
 
-                Color textColor = DockPane.DockPanel.Skin.ToolTabActiveFG;
+                Color textColor = DockPane.DockPanel.Skin.ToolTabActive;
                 TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, textColor, ToolWindowTextFormat);
             }
             else
             {
                 Color textColor;
                 if (tab.Content == DockPane.MouseOverTab)
-                    textColor = DockPane.DockPanel.Skin.ToolTabActiveFG;
+                    textColor = DockPane.DockPanel.Skin.ToolTabActive;
                 else
                     textColor = DockPane.DockPanel.Skin.ToolTabBarFG;
 
                 TextRenderer.DrawText(g, tab.Content.DockHandler.TabText, TextFont, rectText, textColor, ToolWindowTextFormat);
             }
 
-            g.DrawLine(PenToolWindowTabBorder, rect.X + rect.Width - 1, rect.Y, rect.X + rect.Width - 1, rect.Height);
+            // Override Splitter on ActiveTab
+            if (DockPane.ActiveContent == tab.Content)
+                g.DrawLine(new Pen(DockPane.DockPanel.Skin.ToolTabBarBG), rect.X, rect.Y - 1, rect.X + rect.Width - 2, rect.Y - 1);
+
+            g.DrawLine(new Pen(DockPane.DockPanel.Skin.PanelSplitter), rect.X + rect.Width - 1, rect.Y, rect.X + rect.Width - 1, rect.Height);
 
             if (rectTab.Contains(rectIcon))
                 g.DrawIcon(tab.Content.DockHandler.Icon, rectIcon);

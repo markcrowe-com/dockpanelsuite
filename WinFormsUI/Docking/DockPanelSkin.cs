@@ -48,8 +48,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         public Color DocBtnInactiveHoverBG { get; set; }
         public Color ToolTabBarFG { get; set; }
         public Color ToolTabBarBG { get; set; }
-        public Color ToolTabActiveFG { get; set; }
-        public Color ToolTabActiveBG { get; set; }
+        public Color ToolTabActive { get; set; }
         public Color ToolTitleActiveFG { get; set; }
         public Color ToolTitleActiveBG { get; set; }
         public Color ToolTitleLostFocusFG { get; set; }
