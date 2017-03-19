@@ -425,7 +425,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (DockPanel.ActiveContent == content || tab.IsMouseOver)
                 textColor = DockPanel.Skin.AutoHideTabActive;
             else
-                textColor = DockPanel.Skin.AutoHideTabBarFG;
+                textColor = DockPanel.Skin.AutoHideTabInactive;
 
             if (dockState == DockState.DockLeftAutoHide || dockState == DockState.DockRightAutoHide)
                 g.DrawString(content.DockHandler.TabText, TextFont, new SolidBrush(textColor), rectText, StringFormatTabVertical);

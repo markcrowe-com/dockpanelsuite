@@ -492,6 +492,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             skin.AutoHideTabBarFG             = ColorTranslator.FromHtml(styles[24]);
             skin.AutoHideTabBarBG             = ColorTranslator.FromHtml(styles[25]);
             skin.AutoHideTabActive            = ColorTranslator.FromHtml(styles[26]);
+            skin.AutoHideTabInactive          = ColorTranslator.FromHtml(styles[27]);
 
             return skin;
         }

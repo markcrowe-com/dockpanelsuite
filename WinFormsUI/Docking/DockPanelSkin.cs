@@ -58,6 +58,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         public Color AutoHideTabBarFG { get; set; }
         public Color AutoHideTabBarBG { get; set; }
         public Color AutoHideTabActive { get; set; }
+        public Color AutoHideTabInactive { get; set; }
 
         /// <summary>
         /// The skin used to display the Document and ToolWindow style DockStrips and Tabs.

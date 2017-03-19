@@ -1264,7 +1264,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         if (rectCloseButton == ActiveClose) {
                             colorMap[0].NewColor = btnActiveLostFocusHoverFG;
                             colorMap[1].NewColor = MergeBy50(btnActiveLostFocusHoverFG, btnActiveLostFocusHoverBG);
-                            colorMap[2].NewColor = btnActiveLostFocusHoverFG;
+                            colorMap[2].NewColor = btnActiveLostFocusHoverBG;
                         } else {
                             colorMap[0].NewColor = lostFocusText;
                             colorMap[1].NewColor = MergeBy50(lostFocusText, lostFocusColor);
