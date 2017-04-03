@@ -6,19 +6,13 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     internal class VS2012SplitterControl : DockPane.SplitterControlBase
     {
-        private readonly SolidBrush _horizontalBrush;
-        private readonly Color[] _verticalSurroundColors;
+        private readonly SolidBrush _splitterBrush;
 
 
         public VS2012SplitterControl(DockPane pane)
             : base(pane)
         {
-            _horizontalBrush = new SolidBrush(pane.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor); // splitter
-            this._verticalSurroundColors = new[]
-                                               {
-                                                   pane.DockPanel.Skin.DockPaneStripSkin.DocumentGradient
-                                                       .InactiveTabGradient.StartColor
-                                               };
+            _splitterBrush = new SolidBrush(pane.DockPanel.Skin.PanelSplitter);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -35,27 +29,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                 case DockAlignment.Right:
                 case DockAlignment.Left:
                     {
-                        e.Graphics.FillRectangle(_horizontalBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
-/*
-                        using (var path = new GraphicsPath())
-                        {
-                            path.AddRectangle(rect);
-                            using (var brush = new PathGradientBrush(path)
-                                {
-                                    CenterColor = this._horizontalBrush.Color, SurroundColors = _verticalSurroundColors
-                                })
-                            {
-                                e.Graphics.FillRectangle(brush, rect.X + Measures.SplitterSize / 2 - 1, rect.Y,
-                                                         Measures.SplitterSize / 3, rect.Height);
-                            }
-                        }
-*/
+                        e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
                     }
                     break;
                 case DockAlignment.Bottom:
                 case DockAlignment.Top:
                     {
-                        e.Graphics.FillRectangle(_horizontalBrush, rect.X, rect.Y,
+                        e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y,
                                         rect.Width, Measures.SplitterSize);
                     }
                     break;

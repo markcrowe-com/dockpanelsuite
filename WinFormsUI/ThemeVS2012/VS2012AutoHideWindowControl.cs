@@ -8,8 +8,6 @@ namespace WeifenLuo.WinFormsUI.Docking
     {
         private class VS2012AutoHideWindowSplitterControl : SplitterBase
         {
-            private static readonly SolidBrush _horizontalBrush = new SolidBrush(Color.FromArgb(0xFF, 204, 206, 219));
-            private static readonly Color[] _verticalSurroundColors = new[] { SystemColors.Control };
 
             public VS2012AutoHideWindowSplitterControl(DockPanel.AutoHideWindowControl autoHideWindow)
             {
@@ -37,27 +35,13 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (rect.Width <= 0 || rect.Height <= 0)
                     return;
 
-                SolidBrush _splitterBrush = new SolidBrush(AutoHideWindow.DockPanel.Skin.DockPaneStripSkin.ToolWindowGradient.InactiveTabGradient.EndColor);
+                SolidBrush _splitterBrush = new SolidBrush(AutoHideWindow.DockPanel.Skin.PanelSplitter);
                 switch (AutoHideWindow.DockState)
                 {
                     case DockState.DockRightAutoHide:
                     case DockState.DockLeftAutoHide:
                         {
                             e.Graphics.FillRectangle(_splitterBrush, rect.X, rect.Y, Measures.SplitterSize, rect.Height);
-/*
-                            using (var path = new GraphicsPath())
-                            {
-                                path.AddRectangle(rect);
-                                using (var brush = new PathGradientBrush(path)
-                                    {
-                                        CenterColor = Color.FromArgb(0xFF, 204, 206, 219), SurroundColors = _verticalSurroundColors
-                                    })
-                                {
-                                    e.Graphics.FillRectangle(brush, rect.X + Measures.SplitterSize / 2 - 1, rect.Y,
-                                                             Measures.SplitterSize / 3, rect.Height);
-                                }
-                            }
-*/
                         }
                         break;
                     case DockState.DockBottomAutoHide:

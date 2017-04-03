@@ -30,6 +30,36 @@ namespace WeifenLuo.WinFormsUI.Docking
             set { m_autoHideStripSkin = value; }
         }
 
+        // ThemeColors
+        public Color PanelSplitter { get; set; }
+        public Color DocTabBarFG { get; set; }
+        public Color DocTabBarBG { get; set; }
+        public Color DocTabActiveFG { get; set; }
+        public Color DocTabActiveBG { get; set; }
+        public Color DocTabActiveLostFocusFG { get; set; }
+        public Color DocTabActiveLostFocusBG { get; set; }
+        public Color DocTabInactiveHoverFG { get; set; }
+        public Color DocTabInactiveHoverBG { get; set; }
+        public Color DocBtnActiveHoverFG { get; set; }
+        public Color DocBtnActiveHoverBG { get; set; }
+        public Color DocBtnActiveLostFocusHoverFG { get; set; }
+        public Color DocBtnActiveLostFocusHoverBG { get; set; }
+        public Color DocBtnInactiveHoverFG { get; set; }
+        public Color DocBtnInactiveHoverBG { get; set; }
+        public Color ToolTabBarFG { get; set; }
+        public Color ToolTabBarBG { get; set; }
+        public Color ToolTabActive { get; set; }
+        public Color ToolTitleActiveFG { get; set; }
+        public Color ToolTitleActiveBG { get; set; }
+        public Color ToolTitleLostFocusFG { get; set; }
+        public Color ToolTitleLostFocusBG { get; set; }
+        public Color ToolTitleDotActive { get; set; }
+        public Color ToolTitleDotLostFocus { get; set; }
+        public Color AutoHideTabBarFG { get; set; }
+        public Color AutoHideTabBarBG { get; set; }
+        public Color AutoHideTabActive { get; set; }
+        public Color AutoHideTabInactive { get; set; }
+
         /// <summary>
         /// The skin used to display the Document and ToolWindow style DockStrips and Tabs.
         /// </summary>
