@@ -191,14 +191,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             return DockHandler.IsDockStateValid(dockState);
         }
 
-        [LocalizedCategory("Category_Docking")]
+        /*[LocalizedCategory("Category_Docking")]
         [LocalizedDescription("DockContent_TabPageContextMenu_Description")]
         [DefaultValue(null)]
         public ContextMenu TabPageContextMenu
         {
             get	{	return DockHandler.TabPageContextMenu;	}
             set	{	DockHandler.TabPageContextMenu = value;	}
-        }
+        }*/
 
         [LocalizedCategory("Category_Docking")]
         [LocalizedDescription("DockContent_TabPageContextMenuStrip_Description")]

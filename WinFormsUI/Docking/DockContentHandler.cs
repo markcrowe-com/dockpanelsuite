@@ -666,12 +666,12 @@ namespace WeifenLuo.WinFormsUI.Docking
                 return DockHelper.IsDockStateValid(dockState, DockAreas);
         }
 
-        private ContextMenu m_tabPageContextMenu = null;
+        /*private ContextMenu m_tabPageContextMenu = null;
         public ContextMenu TabPageContextMenu
         {
             get	{	return m_tabPageContextMenu;	}
             set	{	m_tabPageContextMenu = value;	}
-        }
+        }*/
 
         private string m_toolTipText = null;
         public string ToolTipText
